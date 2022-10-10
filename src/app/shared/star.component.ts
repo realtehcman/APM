@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
 
 @Component({
     selector: 'pm-stars',
@@ -7,11 +7,16 @@ import { Component, OnChanges, SimpleChanges } from "@angular/core";
 })
 
 export class StarComponent implements OnChanges{
-    numberOfStars = 4;
+    @Input() rating = 0; //rating value gets updated based on the ProductListComponent and converts it to the stars
     cropWidth = 75;
+    @Output() ratingClicked: EventEmitter<string> = new EventEmitter();
 
-    ngOnChanges(changes: SimpleChanges): void {
-        throw new Error("Method not implemented.");
+    ngOnChanges(): void {
+        this.cropWidth = this.rating * 15;
     }
 
+    onClick(): void{
+        console.log(`Rating ${this.rating} was clicked`);
+        this.ratingClicked.emit('Rating $' + this.rating + ' was clicked');  
+    }
 }
