@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IProduct } from './IProduct';
 import { ProductService } from './product.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'pm-products',
@@ -13,6 +15,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   imgMargin = 5;
   errorMessage = '';
   private _searchKeyWord: string = '';
+  sub!: Subscription;
 
   showImg = false;
 
@@ -45,7 +48,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe({
+    this.sub = this.productService.getProducts().subscribe({
       next: (products) => {
         this.products = products;
         this.searchedProducts = this.products;
@@ -57,5 +60,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     console.log('Max implemented OnInit');
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }
