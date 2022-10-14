@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IProduct } from './IProduct';
 import { ProductService } from './product.service';
 
@@ -7,10 +7,11 @@ import { ProductService } from './product.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   pageTitle = "Max' Product List ";
   imgWidth = 50;
   imgMargin = 5;
+  errorMessage = '';
   private _searchKeyWord: string = '';
 
   showImg = false;
@@ -19,7 +20,8 @@ export class ProductListComponent implements OnInit {
 
   searchedProducts: IProduct[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService) {} //implicetly
+  //creating a new service
 
   toggleImg(): void {
     this.showImg = !this.showImg;
@@ -43,9 +45,17 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+    this.productService.getProducts().subscribe({
+      next: (products) => {
+        this.products = products;
+        this.searchedProducts = this.products;
+      },
+      error: (err) => (this.errorMessage = err),
+    });
     this.searchedProducts = this.products;
     // throw new Error("Method not implemented.");
     console.log('Max implemented OnInit');
   }
+
+  ngOnDestroy(): void {}
 }
