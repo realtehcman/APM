@@ -48,7 +48,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+<<<<<<< HEAD
     this.sub = this.productService.getProducts().subscribe({
+=======
+    this.productService.getProducts().subscribe({
+>>>>>>> ecd9fdc (attempt to read a file)
       next: (products) => {
         this.products = products;
         this.searchedProducts = this.products;
@@ -60,7 +64,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     console.log('Max implemented OnInit');
   }
 
+<<<<<<< HEAD
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
+=======
+  ngOnDestroy(): void {}
+>>>>>>> ecd9fdc (attempt to read a file)
 }
