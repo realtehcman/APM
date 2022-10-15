@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from './IProduct';
 import { ProductService } from './product.service';
 import { Subscription } from 'rxjs';
@@ -9,11 +9,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent implements OnInit, OnDestroy {
+export class ProductListComponent implements OnInit {
   pageTitle = "Max' Product List ";
   imgWidth = 50;
   imgMargin = 5;
-  errorMessage = '';
   private _searchKeyWord: string = '';
   sub!: Subscription;
 
@@ -23,8 +22,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   searchedProducts: IProduct[] = [];
 
-  constructor(private productService: ProductService) {} //implicetly
-  //creating a new service
+  constructor(private productService: ProductService) {}
 
   toggleImg(): void {
     this.showImg = !this.showImg;
