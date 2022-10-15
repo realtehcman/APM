@@ -1,9 +1,0 @@
-diff a/src/app/app.module.ts b/src/app/app.module.ts	(rejected hunks)
-@@ -13,7 +13,6 @@
-     AppComponent,
-     ProductListComponent,
-     ConvertToSpace,
--    StarComponent
-   ],
-      imports: [BrowserModule, FormsModule, HttpClientModule],
-   bootstrap: [AppComponent],

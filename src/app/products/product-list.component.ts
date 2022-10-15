@@ -44,24 +44,17 @@ export class ProductListComponent implements OnInit {
       return product.productName.toLocaleLowerCase().includes(searchedBy);
     });
   }
-
-  ngOnInit(): void {
+ ngOnInit(): void {
     this.sub = this.productService.getProducts().subscribe({
-    this.productService.getProducts().subscribe({
-      next: (products) => {
+      next: products => {
         this.products = products;
         this.searchedProducts = this.products;
       },
-      error: (err) => (this.errorMessage = err),
+      error: err => this.err = err
     });
-    this.searchedProducts = this.products;
-    // throw new Error("Method not implemented.");
-    console.log('Max implemented OnInit');
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-  ngOnDestroy(): void {}
-}
 }
