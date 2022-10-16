@@ -15,6 +15,7 @@ export class ProductListComponent implements OnInit {
   imgMargin = 5;
   private _searchKeyWord: string = '';
   sub!: Subscription;
+  err = '';
 
   showImg = false;
 
@@ -44,13 +45,13 @@ export class ProductListComponent implements OnInit {
       return product.productName.toLocaleLowerCase().includes(searchedBy);
     });
   }
- ngOnInit(): void {
+  ngOnInit(): void {
     this.sub = this.productService.getProducts().subscribe({
-      next: products => {
+      next: (products) => {
         this.products = products;
         this.searchedProducts = this.products;
       },
-      error: err => this.err = err
+      error: (err) => (this.err = err),
     });
   }
 
