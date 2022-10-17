@@ -1,13 +1,21 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'pm-root',
+  styleUrls: ['./app.component.css'],
   template: `
-  <div><h1>{{pageTitle}}</h1>
-  <div>{{pageDescription + ' and concatination'}}{{20+1}}</div>
-  <pm-products></pm-products>
-  </div>
-  `
+    <nav class="navbar navbar-expand navbar-light bg-light">
+      <a class="navbar-brand">{{ pageTitle }}</a>
+      <ul class="nav nav-pills">
+        <li><a routerLink="/products">Product List </a></li>
+        <li><a routerLink="/welcome">Home </a></li>
+      </ul>
+    </nav>
+    <div style="  margin-left: 30px">
+      <router-outlet></router-outlet>
+    </div>
+  `,
 })
 export class AppComponent {
   pageTitle = 'Max Product Management';
