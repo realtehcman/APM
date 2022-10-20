@@ -1,31 +1,29 @@
-<div class='card'>
-  <div class='card-header'>
-    {{pageTitle}}
+<div class="card">
+  <div class="card-header">
+    {{ pageTitle }}
   </div>
-  <div class='card-body'>
-    <div class='row'>
-      <div class='col-md-2'>Filter by:</div>
-      <div class='col-md-4'>
-        <input type='text' 
-              [(ngModel)] = 'searchKeyWord'
-        />
+  <div class="card-body"
+    *ngIf = 'products'>
+    <div class="row">
+      <div class="col-md-2">Filter by:</div>
+      <div class="col-md-4">
+        <input type="text" [(ngModel)]="searchKeyWord" />
       </div>
     </div>
-    <div class='row'>
-      <div class='col-md-6'>
-        <h4>Searching — {{searchKeyWord}} </h4>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Searching — {{ searchKeyWord }}</h4>
       </div>
     </div>
-    <div class='table-responsive'>
-      <table class='table'
-             *ngIf='products.length'>
+    <div class="table-responsive">
+      <table class="table" *ngIf="products.length">
         <thead>
           <tr>
             <th>
-              <button class='btn btn-primary'
-                  (click) = 'toggleImg()'
-              >
-                {{showImg ? 'Hide' : 'Show'}} Image{{products.length > 1 ? 's' : ''}}
+              <button class="btn btn-primary" (click)="toggleImg()">
+                {{ showImg ? "Hide" : "Show" }} Image{{
+                  products.length > 1 ? "s" : ""
+                }}
               </button>
             </th>
             <th>Product</th>
@@ -37,29 +35,38 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor = 'let product of searchedProducts'>
-            <td >
-                  <img [src] = 'product.imageUrl'
-                      [title] = 'product.productName'
-                      [style.width.px] = 'imgWidth'
-                      [style.margin.px] = 'imgMargin' 
-                      *ngIf = showImg
-              >
+          <tr *ngFor="let product of searchedProducts">
+            <td>
+              <img
+                [src]="product.imageUrl"
+                [title]="product.productName"
+                [style.width.px]="imgWidth"
+                [style.margin.px]="imgMargin"
+                *ngIf="showImg"
+              />
             </td>
-            <td>{{ product.productName }}</td>
+            <td>
+              <a [routerLink]="['/product', product.productId]">
+                {{ product.productName }}
+              </a>
+            </td>
             <td>{{ product.description }}</td>
-            <td>{{ product.productCode | uppercase | convertToSpaces:'-' }}</td>
+            <td>
+              {{ product.productCode | uppercase | convertToSpaces: "-" }}
+            </td>
             <td>{{ product.releaseDate }}</td>
-            <td>{{ product.price  | currency: 'USD':'symbol':'1.0-0'}}</td>
-            <td><pm-stars [rating] = "product.starRating"></pm-stars>
-                    <!--FIXME (notify)></pm-stars></td> -->
+            <td>{{ product.price | currency: "USD":"symbol":"1.0-0" }}</td>
+            <td>
+              <pm-stars [rating]="product.starRating"></pm-stars>
+              <!--FIXME (notify)></pm-stars></td> -->
+            </td>
           </tr>
+
           <!-- <tr *ngFor='let product of products'>
             <td></td>
           </tr>-->
         </tbody>
       </table>
     </div>
-
   </div>
 </div>
