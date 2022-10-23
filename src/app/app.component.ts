@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
   styleUrls: ['./app.component.css'],
   template: `
     <nav class="navbar navbar-expand navbar-light bg-light">
-      <a class="navbar-brand">{{ pageTitle }}</a>
+      <a class="navbar-brand">{{ title }}</a>
       <ul class="nav nav-pills">
         <li><a routerLink="/products">Product List </a></li>
         <li><a routerLink="/welcome">Home </a></li>
@@ -18,6 +18,6 @@ import { RouterOutlet } from '@angular/router';
   `,
 })
 export class AppComponent {
-  pageTitle = 'Max Product Management';
+  title = 'Max Product Management';
   pageDescription = 'Another variable';
 }

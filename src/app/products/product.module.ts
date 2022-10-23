@@ -10,10 +10,7 @@ import { ProductListComponent } from './product-list.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [
-    ProductDetailComponent,
-    ProductListComponent,
-  ],
+  declarations: [ProductDetailComponent, ProductListComponent],
   imports: [
     RouterModule.forChild([
       { path: 'products', component: ProductListComponent },
